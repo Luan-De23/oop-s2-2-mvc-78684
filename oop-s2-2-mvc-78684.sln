@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodSafety.MVC", "FoodSafety.MVC\FoodSafety.MVC.csproj", "{3015E528-DB41-4D6E-AB15-656F9508041B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodSafety.Library", "FoodSafety.Library\FoodSafety.Library.csproj", "{0E4F1482-A2B7-4522-8430-9572FBA13634}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodSafety.Tests", "FoodSafety.Tests\FoodSafety.Tests.csproj", "{21AC1EF9-4090-4F47-A388-9B79760839B0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3015E528-DB41-4D6E-AB15-656F9508041B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3015E528-DB41-4D6E-AB15-656F9508041B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3015E528-DB41-4D6E-AB15-656F9508041B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3015E528-DB41-4D6E-AB15-656F9508041B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E4F1482-A2B7-4522-8430-9572FBA13634}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E4F1482-A2B7-4522-8430-9572FBA13634}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E4F1482-A2B7-4522-8430-9572FBA13634}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E4F1482-A2B7-4522-8430-9572FBA13634}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21AC1EF9-4090-4F47-A388-9B79760839B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21AC1EF9-4090-4F47-A388-9B79760839B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21AC1EF9-4090-4F47-A388-9B79760839B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21AC1EF9-4090-4F47-A388-9B79760839B0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
