@@ -1,0 +1,72 @@
+@model FoodSafety.Library.ViewModel
+
+<div class="container">
+    <h1>Dashboard de Segurança Alimentar</h1>
+    
+    <div class="row mt-4">
+        
+        <div class="col-md-4">
+            <div class="card bg-success text-white p-3">
+                <h3>Inspections This Month</h3>
+                <p class="display-4">@Model.TotalInspections</p>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card bg-primary text-white p-3">
+                <h3>Failed Inspections</h3>
+                <p class="display-4">@Model.TotalFail</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-warning text-dark p-3">
+                <h3>Overdue FollowUps</h3>
+                <p class="display-4">@Model.OverdueFollowUps</p>
+            </div>
+        </div>
+    </div>
+    <form asp-action="Index" method="get" class="border p-3 mb-4 bg-light shadow-sm">
+        <div class="row g-3 align-items-end">
+            <div class="col-md-4">
+                <label class="form-label">Town</label>
+                <select name="SelectedTown" class="form-select" asp-items="ViewBag.TownList">
+                    <option value="">All Towns</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Risk Rating</label>
+                <select name="SelectedRiskRating" class="form-select" asp-items="ViewBag.RiskList">
+                    <option value="">All Ratings</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">Filter</button>
+            </div>
+        </div>
+    </form>
+
+    <h2 class="mt-5">Últimas Inspeções</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Data</th>
+            <th>Estabelecimento</th>
+            <th>Score</th>
+            <th>Town</th>
+            <th>Risk Rating</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.AllInspections) {
+            <tr>
+                <td>@item.InspectionDate.ToString("dd/MM/yyyy")</td>
+                <td>@item.Premises.Name</td>
+                <td>@item.Score</td>
+                <td>@item.Premises.Town</td>
+                <td>@item.Premises.RiskRating</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
