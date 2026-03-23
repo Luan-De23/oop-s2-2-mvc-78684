@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FoodSafety.MVC.Controllers
 {
-    [Authorize(Roles = "Admin,Inspector")]
+    
     public class PremisesController : Controller
     {
         private readonly ILogger<PremisesController> _logger;
@@ -30,6 +30,7 @@ namespace FoodSafety.MVC.Controllers
         }
 
         // GET: Premises/Details/5
+        [Authorize(Roles = "Admin,Inspector,Viewer")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -58,17 +59,19 @@ namespace FoodSafety.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Inspector")]
         public async Task<IActionResult> Create([Bind("Id,Name,Address,Town,RiskRating")] Premises premises)
         {
+            
             if (ModelState.IsValid)
             {
                 _context.Add(premises);
                 await _context.SaveChangesAsync();
+                _logger.LogInformation("Premise created successfully");
                 return RedirectToAction(nameof(Index));
             }
             return View(premises);
         }
-
         // GET: Premises/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -90,6 +93,7 @@ namespace FoodSafety.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Inspector")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,Town,RiskRating")] Premises premises)
         {
             if (id != premises.Id)
@@ -141,6 +145,7 @@ namespace FoodSafety.MVC.Controllers
         // POST: Premises/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var premises = await _context.Premises.FindAsync(id);

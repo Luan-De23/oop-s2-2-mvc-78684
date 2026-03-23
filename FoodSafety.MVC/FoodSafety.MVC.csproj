@@ -33,4 +33,12 @@
       <Folder Include="Pages\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\Inspector\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Inspector\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Inspector\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Inspector\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Inspector\Index.cshtml" />
+    </ItemGroup>
+
 </Project>

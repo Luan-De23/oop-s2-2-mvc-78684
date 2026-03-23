@@ -11,8 +11,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FoodSafety.MVC.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    [Authorize(Roles = "Inspector")]
     public class FollowUpController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -32,6 +30,7 @@ namespace FoodSafety.MVC.Controllers
         }
 
         // GET: FollowUp/Details/5
+        [Authorize(Roles = "Admin,Inspector,Viewer")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -62,8 +61,16 @@ namespace FoodSafety.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Inspector")]
         public async Task<IActionResult> Create([Bind("Id,DueDate,Status,ClosedDate,InspectionId")] FollowUp followUp)
         {
+            var inspections =  await _context.Inspections
+                .FirstOrDefaultAsync();
+            
+            if (inspections != null && inspections.InspectionDate > followUp.DueDate)
+            {
+                ModelState.AddModelError("DueDate","Invalid entry");
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(followUp);
@@ -96,11 +103,18 @@ namespace FoodSafety.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Inspector")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,DueDate,Status,ClosedDate,InspectionId")] FollowUp followUp)
         {
             if (id != followUp.Id)
             {
                 return NotFound();
+            }
+            
+            var todayDate = DateOnly.FromDateTime(DateTime.Today);
+            if (followUp.ClosedDate == null &&  followUp.Status == State.Closed)
+            {
+                followUp.ClosedDate = todayDate;
             }
 
             if (ModelState.IsValid)
@@ -149,6 +163,7 @@ namespace FoodSafety.MVC.Controllers
         // POST: FollowUp/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var followUp = await _context.FollowUps.FindAsync(id);

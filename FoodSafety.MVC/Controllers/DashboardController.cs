@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FoodSafety.MVC.Controllers;
 
-//[Authorize(Roles = "Admin,Inspector,Viewer")]
+[Authorize(Roles = "Admin,Inspector,Viewer")]
 public class DashboardController : Controller
 {
     
@@ -73,8 +73,7 @@ public class DashboardController : Controller
         // search fo overdue followUps
         dashboard.OverdueFollowUps = await _context.FollowUps
             .Where(f => premisesIds.Contains(f.Inspection.Premises.Id) &&
-                        f.Status == State.Open &&
-                        f.DueDate < thisMonth)
+                        f.Status == State.Open && f.DueDate < thisMonth)
             .CountAsync();
 
         

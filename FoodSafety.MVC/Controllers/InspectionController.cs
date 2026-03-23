@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FoodSafety.MVC.Controllers
 {
-    [Authorize(Roles = "Admin,Inspector")]
     public class InspectionController : Controller
     {
         private readonly ILogger<InspectionController> _logger;
@@ -29,7 +28,8 @@ namespace FoodSafety.MVC.Controllers
             var applicationDbContext = _context.Inspections.Include(i => i.Premises);
             return View(await applicationDbContext.ToListAsync());
         }
-
+        
+        [Authorize(Roles = "Admin,Inspector,Viewer")]
         // GET: Inspection/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -61,8 +61,13 @@ namespace FoodSafety.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Inspector")]
         public async Task<IActionResult> Create([Bind("Id,InspectionDate,Score,OutCome,Notes,PremisesId")] Inspection inspection)
         {
+            if (inspection.Score < 0 || inspection.Score > 100)
+            {
+                ModelState.AddModelError("Score", "Score must be between 0 and 100");
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(inspection);
@@ -95,13 +100,18 @@ namespace FoodSafety.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Inspector")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,InspectionDate,Score,OutCome,Notes,PremisesId")] Inspection inspection)
         {
             if (id != inspection.Id)
             {
                 return NotFound();
             }
-
+            /*
+            if (inspection.Score < 0 || inspection.Score > 100)
+            {
+                ModelState.AddModelError("Score", "Score must be between 0 and 100");
+            }*/
             if (ModelState.IsValid)
             {
                 try
@@ -148,6 +158,7 @@ namespace FoodSafety.MVC.Controllers
         // POST: Inspection/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var inspection = await _context.Inspections.FindAsync(id);

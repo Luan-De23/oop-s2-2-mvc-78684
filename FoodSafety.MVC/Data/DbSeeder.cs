@@ -21,7 +21,7 @@ public class DbSeeder
                 Email = adminEmail,
                 EmailConfirmed = true
             };
-            var result = await userManager.CreateAsync(user, "admin1234");
+            var result = await userManager.CreateAsync(user, "Admin1234!");
             if (result.Succeeded)
             {
                 await userManager.AddToRoleAsync(user, "Admin");
@@ -43,7 +43,7 @@ public class DbSeeder
                 Email = inspectorEmail,
                 EmailConfirmed = true
             };
-            var result = await userManager.CreateAsync(user, "inspector1234");
+            var result = await userManager.CreateAsync(user, "Inspector1234!");
             if (result.Succeeded)
             {
                 await userManager.AddToRoleAsync(user, "Inspector");
@@ -65,7 +65,7 @@ public class DbSeeder
                 Email = ViewerEmail,
                 EmailConfirmed = true
             };
-            var result = await userManager.CreateAsync(user, "Viewer1234");
+            var result = await userManager.CreateAsync(user, "Viewer1234!");
             if (result.Succeeded)
             {
                 await userManager.AddToRoleAsync(user, "Viewer");
