@@ -22,7 +22,7 @@ public class DashboardController : Controller
     
     public async Task<IActionResult> Index(string SelectedTown,  string SelectedRiskRating)
     {
-        
+         
         IQueryable<Premises> premisesQuery = _context.Premises;
         
         if (!string.IsNullOrEmpty(SelectedTown))
