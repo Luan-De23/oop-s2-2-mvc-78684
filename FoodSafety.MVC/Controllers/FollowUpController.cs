@@ -30,7 +30,6 @@ namespace FoodSafety.MVC.Controllers
         }
 
         // GET: FollowUp/Details/5
-        [Authorize(Roles = "Admin,Inspector,Viewer")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -50,6 +49,7 @@ namespace FoodSafety.MVC.Controllers
         }
 
         // GET: FollowUp/Create
+        [Authorize(Roles = "Admin,Inspector")]
         public IActionResult Create()
         {
             ViewData["InspectionId"] = new SelectList(_context.Inspections, "Id", "Notes");
@@ -93,6 +93,7 @@ namespace FoodSafety.MVC.Controllers
         }
 
         // GET: FollowUp/Edit/5
+        [Authorize(Roles = "Admin,Inspector")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -166,6 +167,7 @@ namespace FoodSafety.MVC.Controllers
         }
 
         // GET: FollowUp/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

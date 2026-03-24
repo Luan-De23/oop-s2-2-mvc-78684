@@ -30,7 +30,6 @@ namespace FoodSafety.MVC.Controllers
         }
 
         // GET: Premises/Details/5
-        [Authorize(Roles = "Admin,Inspector,Viewer")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -49,6 +48,7 @@ namespace FoodSafety.MVC.Controllers
         }
 
         // GET: Premises/Create
+        [Authorize(Roles = "Admin,Inspector")]
         public IActionResult Create()
         {
             return View();
@@ -143,6 +143,7 @@ namespace FoodSafety.MVC.Controllers
         }
 
         // GET: Premises/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

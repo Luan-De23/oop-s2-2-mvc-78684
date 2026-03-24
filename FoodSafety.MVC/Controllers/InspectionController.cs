@@ -29,7 +29,6 @@ namespace FoodSafety.MVC.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
         
-        [Authorize(Roles = "Admin,Inspector,Viewer")]
         // GET: Inspection/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -50,6 +49,7 @@ namespace FoodSafety.MVC.Controllers
         }
 
         // GET: Inspection/Create
+        [Authorize(Roles = "Admin,Inspector")]
         public IActionResult Create()
         {
             ViewData["PremisesId"] = new SelectList(_context.Premises, "Id", "Address");
@@ -88,6 +88,7 @@ namespace FoodSafety.MVC.Controllers
         }
 
         // GET: Inspection/Edit/5
+        [Authorize(Roles = "Admin,Inspector")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -157,6 +158,7 @@ namespace FoodSafety.MVC.Controllers
         }
 
         // GET: Inspection/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
