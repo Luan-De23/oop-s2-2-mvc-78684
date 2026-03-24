@@ -62,15 +62,22 @@ namespace FoodSafety.MVC.Controllers
         [Authorize(Roles = "Admin,Inspector")]
         public async Task<IActionResult> Create([Bind("Id,Name,Address,Town,RiskRating")] Premises premises)
         {
-            
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(premises);
-                await _context.SaveChangesAsync();
-                _logger.LogInformation("Premise created successfully");
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(premises);
+                    await _context.SaveChangesAsync();
+                    _logger.LogInformation("Premises created: {PremisesId} {Name} by {User}", premises.Id, premises.Name, User.Identity?.Name ?? "Anonymous");
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(premises);
             }
-            return View(premises);
+            catch (Exception e)
+            {
+                _logger.LogError("Unhandled exception occurred: {Message} by {User}", e.Message, User.Identity?.Name ?? "Anonymous");
+                throw;
+            }
         }
         // GET: Premises/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -96,32 +103,43 @@ namespace FoodSafety.MVC.Controllers
         [Authorize(Roles = "Admin,Inspector")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,Town,RiskRating")] Premises premises)
         {
-            if (id != premises.Id)
+            try
             {
-                return NotFound();
+                if (id != premises.Id)
+                {
+                    return NotFound();
+                }
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        _context.Update(premises);
+                        await _context.SaveChangesAsync();
+                        _logger.LogInformation("Premises updated: {PremisesId} by {User}", premises.Id, User.Identity?.Name ?? "Anonymous");
+                    }
+                    catch (DbUpdateConcurrencyException ex)
+                    {
+                        if (!PremisesExists(premises.Id))
+                        {
+                            _logger.LogError("Exception in {Action}: {Message}", nameof(Edit), ex.Message);
+                            return NotFound();
+                        }
+                        else
+                        {
+                            _logger.LogError("Exception in {Action}: {Message}", nameof(Edit), ex.Message);
+                            throw;
+                        }
+                    }
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(premises);
             }
-
-            if (ModelState.IsValid)
+            catch (Exception e)
             {
-                try
-                {
-                    _context.Update(premises);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!PremisesExists(premises.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                _logger.LogError("Unhandled exception occurred: {Message} by {User}", e.Message, User.Identity?.Name ?? "Anonymous");
+                throw;
             }
-            return View(premises);
+            
         }
 
         // GET: Premises/Delete/5

@@ -1,0 +1,95 @@
+2026-03-24 10:12:28.196 +00:00 [INF] Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*) FROM "sqlite_master" WHERE "type" = 'table' AND "rootpage" IS NOT NULL;
+2026-03-24 10:12:28.505 +00:00 [INF] Executed DbCommand (4ms) [Parameters=[@normalizedName='?' (Size = 5)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."ConcurrencyStamp", "a"."Name", "a"."NormalizedName"
+FROM "AspNetRoles" AS "a"
+WHERE "a"."NormalizedName" = @normalizedName
+LIMIT 1
+2026-03-24 10:12:28.553 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[@normalizedEmail='?' (Size = 15)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."AccessFailedCount", "a"."ConcurrencyStamp", "a"."Email", "a"."EmailConfirmed", "a"."LockoutEnabled", "a"."LockoutEnd", "a"."NormalizedEmail", "a"."NormalizedUserName", "a"."PasswordHash", "a"."PhoneNumber", "a"."PhoneNumberConfirmed", "a"."SecurityStamp", "a"."TwoFactorEnabled", "a"."UserName"
+FROM "AspNetUsers" AS "a"
+WHERE "a"."NormalizedEmail" = @normalizedEmail
+LIMIT 2
+2026-03-24 10:12:28.585 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[@normalizedName='?' (Size = 9)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."ConcurrencyStamp", "a"."Name", "a"."NormalizedName"
+FROM "AspNetRoles" AS "a"
+WHERE "a"."NormalizedName" = @normalizedName
+LIMIT 1
+2026-03-24 10:12:28.590 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[@normalizedEmail='?' (Size = 19)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."AccessFailedCount", "a"."ConcurrencyStamp", "a"."Email", "a"."EmailConfirmed", "a"."LockoutEnabled", "a"."LockoutEnd", "a"."NormalizedEmail", "a"."NormalizedUserName", "a"."PasswordHash", "a"."PhoneNumber", "a"."PhoneNumberConfirmed", "a"."SecurityStamp", "a"."TwoFactorEnabled", "a"."UserName"
+FROM "AspNetUsers" AS "a"
+WHERE "a"."NormalizedEmail" = @normalizedEmail
+LIMIT 2
+2026-03-24 10:12:28.594 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[@normalizedName='?' (Size = 6)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."ConcurrencyStamp", "a"."Name", "a"."NormalizedName"
+FROM "AspNetRoles" AS "a"
+WHERE "a"."NormalizedName" = @normalizedName
+LIMIT 1
+2026-03-24 10:12:28.597 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[@normalizedEmail='?' (Size = 16)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."AccessFailedCount", "a"."ConcurrencyStamp", "a"."Email", "a"."EmailConfirmed", "a"."LockoutEnabled", "a"."LockoutEnd", "a"."NormalizedEmail", "a"."NormalizedUserName", "a"."PasswordHash", "a"."PhoneNumber", "a"."PhoneNumberConfirmed", "a"."SecurityStamp", "a"."TwoFactorEnabled", "a"."UserName"
+FROM "AspNetUsers" AS "a"
+WHERE "a"."NormalizedEmail" = @normalizedEmail
+LIMIT 2
+2026-03-24 10:12:28.705 +00:00 [INF] User profile is available. Using 'C:\Users\luanh\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-03-24 10:12:28.860 +00:00 [INF] Now listening on: http://localhost:5111
+2026-03-24 10:12:28.863 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-03-24 10:12:28.865 +00:00 [INF] Hosting environment: Development
+2026-03-24 10:12:28.867 +00:00 [INF] Content root path: C:\Users\luanh\RiderProjects\oop-s2-2-mvc-78684\FoodSafety.MVC
+2026-03-24 10:12:29.517 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5111/ - null null
+2026-03-24 10:12:29.527 +00:00 [WRN] Failed to determine the https port for redirect.
+2026-03-24 10:12:29.615 +00:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin|Inspector|Viewer)
+2026-03-24 10:12:29.624 +00:00 [INF] AuthenticationScheme: Identity.Application was challenged.
+2026-03-24 10:12:29.631 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5111/ - 302 0 null 115.2854ms
+2026-03-24 10:12:29.644 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5111/Identity/Account/Login?ReturnUrl=%2F - null null
+2026-03-24 10:12:29.658 +00:00 [INF] Executing endpoint '/Account/Login'
+2026-03-24 10:12:29.690 +00:00 [INF] Route matched with {page = "/Account/Login", area = "Identity", action = "", controller = ""}. Executing page /Account/Login
+2026-03-24 10:12:29.718 +00:00 [INF] Executing handler method FoodSafety.MVC.Areas.Identity.Pages.Account.LoginModel.OnGetAsync - ModelState is "Valid"
+2026-03-24 10:12:29.728 +00:00 [INF] AuthenticationScheme: Identity.External signed out.
+2026-03-24 10:12:29.732 +00:00 [INF] Executed handler method OnGetAsync, returned result .
+2026-03-24 10:12:29.736 +00:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2026-03-24 10:12:29.739 +00:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2026-03-24 10:12:29.869 +00:00 [INF] Executed page /Account/Login in 173.013ms
+2026-03-24 10:12:29.872 +00:00 [INF] Executed endpoint '/Account/Login'
+2026-03-24 10:12:29.877 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5111/Identity/Account/Login?ReturnUrl=%2F - 200 null text/html; charset=utf-8 232.3861ms
+2026-03-24 10:12:29.910 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5111/lib/bootstrap/dist/css/bootstrap.min.css - null null
+2026-03-24 10:12:29.911 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5111/css/site.css?v=j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg - null null
+2026-03-24 10:12:29.911 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5111/FoodSafety.MVC.styles.css?v=vxGSshfodwEILbPkn8q0rrCWIn7UjwptmlSXjPrvfkM - null null
+2026-03-24 10:12:29.912 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5111/lib/bootstrap/dist/js/bootstrap.bundle.min.js - null null
+2026-03-24 10:12:29.912 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5111/lib/jquery/dist/jquery.min.js - null null
+2026-03-24 10:12:29.916 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5111/lib/jquery-validation/dist/jquery.validate.min.js - null null
+2026-03-24 10:12:29.922 +00:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2026-03-24 10:12:29.922 +00:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2026-03-24 10:12:29.922 +00:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2026-03-24 10:12:29.928 +00:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2026-03-24 10:12:29.928 +00:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2026-03-24 10:12:29.931 +00:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2026-03-24 10:12:29.980 +00:00 [INF] Sending file. Request path: 'lib/jquery-validation/dist/jquery.validate.min.js'. Physical path: 'C:\Users\luanh\RiderProjects\oop-s2-2-mvc-78684\FoodSafety.MVC\obj\Debug\net10.0\compressed\mvutjowvhl-{0}-gk0pw8i4co-gk0pw8i4co.gz'
+2026-03-24 10:12:29.980 +00:00 [INF] Sending file. Request path: 'FoodSafety.MVC.styles.css'. Physical path: 'C:\Users\luanh\RiderProjects\oop-s2-2-mvc-78684\FoodSafety.MVC\obj\Debug\net10.0\compressed\r15mf1dgbi-{0}-f03mxid522-f03mxid522.gz'
+2026-03-24 10:12:29.980 +00:00 [INF] Sending file. Request path: 'css/site.css'. Physical path: 'C:\Users\luanh\RiderProjects\oop-s2-2-mvc-78684\FoodSafety.MVC\obj\Debug\net10.0\compressed\2o6hk9ci2b-{0}-b9sayid5wm-b9sayid5wm.gz'
+2026-03-24 10:12:29.981 +00:00 [INF] Sending file. Request path: 'lib/bootstrap/dist/js/bootstrap.bundle.min.js'. Physical path: 'C:\Users\luanh\RiderProjects\oop-s2-2-mvc-78684\FoodSafety.MVC\obj\Debug\net10.0\compressed\y45qx01a01-{0}-hd3gran6i8-hd3gran6i8.gz'
+2026-03-24 10:12:29.981 +00:00 [INF] Sending file. Request path: 'lib/jquery/dist/jquery.min.js'. Physical path: 'C:\Users\luanh\RiderProjects\oop-s2-2-mvc-78684\FoodSafety.MVC\obj\Debug\net10.0\compressed\ex3yu98rm4-{0}-m9qm4tazc0-m9qm4tazc0.gz'
+2026-03-24 10:12:29.981 +00:00 [INF] Sending file. Request path: 'lib/bootstrap/dist/css/bootstrap.min.css'. Physical path: 'C:\Users\luanh\RiderProjects\oop-s2-2-mvc-78684\FoodSafety.MVC\obj\Debug\net10.0\compressed\4kpi4ynt6p-{0}-43atpzeawx-43atpzeawx.gz'
+2026-03-24 10:12:29.983 +00:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2026-03-24 10:12:29.985 +00:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2026-03-24 10:12:29.989 +00:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2026-03-24 10:12:29.992 +00:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2026-03-24 10:12:29.993 +00:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2026-03-24 10:12:29.995 +00:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2026-03-24 10:12:29.997 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5111/lib/jquery-validation/dist/jquery.validate.min.js - 200 25344 text/javascript 81.0284ms
+2026-03-24 10:12:29.998 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5111/FoodSafety.MVC.styles.css?v=vxGSshfodwEILbPkn8q0rrCWIn7UjwptmlSXjPrvfkM - 200 1142 text/css 87.1821ms
+2026-03-24 10:12:30.000 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5111/css/site.css?v=j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg - 200 700 text/css 88.7859ms
+2026-03-24 10:12:30.001 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5111/lib/bootstrap/dist/js/bootstrap.bundle.min.js - 200 80770 text/javascript 88.7492ms
+2026-03-24 10:12:30.002 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5111/lib/jquery/dist/jquery.min.js - 200 87578 text/javascript 90.4722ms
+2026-03-24 10:12:30.004 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5111/lib/bootstrap/dist/css/bootstrap.min.css - 200 232876 text/css 93.5291ms
+2026-03-24 10:12:30.015 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5111/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js - null null
+2026-03-24 10:12:30.018 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5111/js/site.js?v=hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo - null null
+2026-03-24 10:12:30.044 +00:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2026-03-24 10:12:30.048 +00:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2026-03-24 10:12:30.050 +00:00 [INF] Sending file. Request path: 'js/site.js'. Physical path: 'C:\Users\luanh\RiderProjects\oop-s2-2-mvc-78684\FoodSafety.MVC\obj\Debug\net10.0\compressed\8n03q0km7d-{0}-xtxxf3hu2r-xtxxf3hu2r.gz'
+2026-03-24 10:12:30.051 +00:00 [INF] Sending file. Request path: 'lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js'. Physical path: 'C:\Users\luanh\RiderProjects\oop-s2-2-mvc-78684\FoodSafety.MVC\obj\Debug\net10.0\compressed\uk758jdlj1-{0}-48y08845bh-48y08845bh.gz'
+2026-03-24 10:12:30.052 +00:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2026-03-24 10:12:30.054 +00:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2026-03-24 10:12:30.056 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5111/js/site.js?v=hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo - 200 264 text/javascript 37.6405ms
+2026-03-24 10:12:30.057 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5111/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js - 200 5864 text/javascript 42.8577ms
+2026-03-24 10:12:43.090 +00:00 [INF] Application is shutting down...

@@ -444,3 +444,4 @@ C:\Users\luanh\RiderProjects\oop-s2-2-mvc-78684\FoodSafety.MVC\bin\Debug\net10.0
 C:\Users\luanh\RiderProjects\oop-s2-2-mvc-78684\FoodSafety.MVC\bin\Debug\net10.0\Serilog.Sinks.Console.dll
 C:\Users\luanh\RiderProjects\oop-s2-2-mvc-78684\FoodSafety.MVC\bin\Debug\net10.0\Serilog.Sinks.Debug.dll
 C:\Users\luanh\RiderProjects\oop-s2-2-mvc-78684\FoodSafety.MVC\bin\Debug\net10.0\Serilog.Sinks.File.dll
+C:\Users\luanh\RiderProjects\oop-s2-2-mvc-78684\FoodSafety.MVC\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.InMemory.dll

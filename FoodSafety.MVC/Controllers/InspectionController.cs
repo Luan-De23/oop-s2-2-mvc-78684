@@ -64,18 +64,27 @@ namespace FoodSafety.MVC.Controllers
         [Authorize(Roles = "Admin,Inspector")]
         public async Task<IActionResult> Create([Bind("Id,InspectionDate,Score,OutCome,Notes,PremisesId")] Inspection inspection)
         {
-            if (inspection.Score < 0 || inspection.Score > 100)
+            try
             {
-                ModelState.AddModelError("Score", "Score must be between 0 and 100");
+                if (inspection.Score < 0 || inspection.Score > 100)
+                {
+                    ModelState.AddModelError("Score", "Score must be between 0 and 100");
+                }
+                if (ModelState.IsValid)
+                {
+                    _context.Add(inspection);
+                    await _context.SaveChangesAsync();
+                    _logger.LogInformation("Inspection created: {InspectionId} for PremisesId {PremisesId} by {User}", inspection.Id, inspection.PremisesId, User.Identity?.Name ?? "Anonymous");
+                    return RedirectToAction(nameof(Index));
+                }
+                ViewData["PremisesId"] = new SelectList(_context.Premises, "Id", "Address", inspection.PremisesId);
+                return View(inspection);
             }
-            if (ModelState.IsValid)
+            catch (Exception e)
             {
-                _context.Add(inspection);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                _logger.LogError("Unhandled exception occurred: {Message} by {User}", e.Message, User.Identity?.Name ?? "Anonymous");
+                throw;
             }
-            ViewData["PremisesId"] = new SelectList(_context.Premises, "Id", "Address", inspection.PremisesId);
-            return View(inspection);
         }
 
         // GET: Inspection/Edit/5
@@ -103,37 +112,48 @@ namespace FoodSafety.MVC.Controllers
         [Authorize(Roles = "Admin,Inspector")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,InspectionDate,Score,OutCome,Notes,PremisesId")] Inspection inspection)
         {
-            if (id != inspection.Id)
+            try
             {
-                return NotFound();
-            }
-            /*
-            if (inspection.Score < 0 || inspection.Score > 100)
-            {
-                ModelState.AddModelError("Score", "Score must be between 0 and 100");
-            }*/
-            if (ModelState.IsValid)
-            {
-                try
+                if (id != inspection.Id)
                 {
-                    _context.Update(inspection);
-                    await _context.SaveChangesAsync();
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
+                if (inspection.Score < 0 || inspection.Score > 100)
                 {
-                    if (!InspectionExists(inspection.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    ModelState.AddModelError("Score", "Score must be between 0 and 100");
                 }
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        _context.Update(inspection);
+                        await _context.SaveChangesAsync();
+                        _logger.LogInformation("Invalid score {Score} attempted for PremisesId {PremisesId} by {User}", inspection.Score, inspection.PremisesId, User.Identity?.Name ?? "Anonymous");
+                    }
+                    catch (DbUpdateConcurrencyException e)
+                    {
+                        if (!InspectionExists(inspection.Id))
+                        {
+                            _logger.LogError("Exception in {Action}: {Message}", nameof(Edit), e.Message);
+                            return NotFound();
+                        }
+                        else
+                        {
+                            _logger.LogError("Exception in {Action}: {Message}", nameof(Edit), e.Message);
+                            throw;
+                        }
+                    }
+                    return RedirectToAction(nameof(Index));
+                }
+                ViewData["PremisesId"] = new SelectList(_context.Premises, "Id", "Address", inspection.PremisesId);
+                return View(inspection);
             }
-            ViewData["PremisesId"] = new SelectList(_context.Premises, "Id", "Address", inspection.PremisesId);
-            return View(inspection);
+            catch (Exception e)
+            {
+                _logger.LogInformation("Inspection updated: {InspectionId} for PremisesId {PremisesId} by {User}", inspection.Id, inspection.PremisesId, User.Identity?.Name ?? "Anonymous");
+                throw;
+            }
+            
         }
 
         // GET: Inspection/Delete/5

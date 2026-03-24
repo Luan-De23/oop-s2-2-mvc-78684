@@ -64,21 +64,32 @@ namespace FoodSafety.MVC.Controllers
         [Authorize(Roles = "Admin,Inspector")]
         public async Task<IActionResult> Create([Bind("Id,DueDate,Status,ClosedDate,InspectionId")] FollowUp followUp)
         {
-            var inspections =  await _context.Inspections
-                .FirstOrDefaultAsync();
+            try
+            {
+                var inspections =  await _context.Inspections
+                    .FirstOrDefaultAsync(i => i.Id == followUp.InspectionId);
             
-            if (inspections != null && inspections.InspectionDate > followUp.DueDate)
-            {
-                ModelState.AddModelError("DueDate","Invalid entry");
+                if (inspections != null && inspections.InspectionDate > followUp.DueDate)
+                {
+                    ModelState.AddModelError("DueDate","Invalid entry");
+                    _logger.LogWarning("FollowUp DueDate {DueDate} is before InspectionDate {InspectionDate} by {User}", followUp.DueDate, inspections.InspectionDate, User.Identity.Name ?? "Anonymous");
+                }
+                if (ModelState.IsValid)
+                {
+                    _context.Add(followUp);
+                    await _context.SaveChangesAsync();
+                    _logger.LogInformation("FollowUp created: {FollowUpId} for InspectionId {InspectionId} by {User}");
+                    return RedirectToAction(nameof(Index));
+                }
+                ViewData["InspectionId"] = new SelectList(_context.Inspections, "Id", "Notes", followUp.InspectionId);
+                return View(followUp);
             }
-            if (ModelState.IsValid)
+            catch (Exception e)
             {
-                _context.Add(followUp);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                        _logger.LogError("Unhandled exception occurred: {Message} by {User}", e.Message, User.Identity?.Name ?? "Anonymous");
+                throw;
             }
-            ViewData["InspectionId"] = new SelectList(_context.Inspections, "Id", "Notes", followUp.InspectionId);
-            return View(followUp);
+            
         }
 
         // GET: FollowUp/Edit/5
@@ -106,39 +117,52 @@ namespace FoodSafety.MVC.Controllers
         [Authorize(Roles = "Admin,Inspector")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,DueDate,Status,ClosedDate,InspectionId")] FollowUp followUp)
         {
-            if (id != followUp.Id)
+            try
             {
-                return NotFound();
-            }
+                if (id != followUp.Id)
+                {
+                    return NotFound();
+                }
             
-            var todayDate = DateOnly.FromDateTime(DateTime.Today);
-            if (followUp.ClosedDate == null &&  followUp.Status == State.Closed)
-            {
-                followUp.ClosedDate = todayDate;
-            }
+                var todayDate = DateOnly.FromDateTime(DateTime.Today);
+                if (followUp.Status == State.Closed)
+                {
+                    followUp.ClosedDate = todayDate;
+                    _logger.LogInformation("FollowUp closed: {todayDate} by {User}", todayDate,  User.Identity.Name ?? "Anonymous" );
+                }
 
-            if (ModelState.IsValid)
-            {
-                try
+                if (ModelState.IsValid)
                 {
-                    _context.Update(followUp);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!FollowUpExists(followUp.Id))
+                    try
                     {
-                        return NotFound();
+                        _context.Update(followUp);
+                        await _context.SaveChangesAsync();
+                        _logger.LogInformation("FollowUp closed: {FollowUpId} on {ClosedDate} by {User}", followUp.Id, followUp.ClosedDate, User.Identity?.Name ?? "Anonymous");
                     }
-                    else
+                    catch (DbUpdateConcurrencyException e)
                     {
-                        throw;
+                        if (!FollowUpExists(followUp.Id))
+                        {
+                            _logger.LogError("Exception in {Action}: {Message}", nameof(Edit), e.Message);
+                            return NotFound();
+                        }
+                        else
+                        {
+                            _logger.LogError("Exception in {Action}: {Message}");
+                            throw;
+                        }
+                    
                     }
+                    return RedirectToAction(nameof(Index));
                 }
-                return RedirectToAction(nameof(Index));
+                ViewData["InspectionId"] = new SelectList(_context.Inspections, "Id", "Notes", followUp.InspectionId);
+                return View(followUp);
             }
-            ViewData["InspectionId"] = new SelectList(_context.Inspections, "Id", "Notes", followUp.InspectionId);
-            return View(followUp);
+            catch (Exception e)
+            {
+                _logger.LogError("Unhandled exception occurred: {Message} by {User}", e.Message, User.Identity?.Name ?? "Anonymous");
+                throw;
+            }
         }
 
         // GET: FollowUp/Delete/5

@@ -6,6 +6,7 @@ namespace FoodSafety.MVC.Controllers;
 
 public class HomeController : Controller
 {
+    private readonly ILogger<FollowUpController> _logger;
     public IActionResult Index()
     {
         return View();
@@ -19,6 +20,7 @@ public class HomeController : Controller
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
+        _logger.LogError("Unhandled exception occurred: {Message} by {User}");
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }
