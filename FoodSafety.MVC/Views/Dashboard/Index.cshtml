@@ -1,7 +1,7 @@
 @model FoodSafety.Library.ViewModel
 
 <div class="container">
-    <h1>Dashboard de Segurança Alimentar</h1>
+    <h1>Food Safety Dashboard</h1>
     
     <div class="row mt-4">
         
@@ -13,7 +13,7 @@
         </div>
         
         <div class="col-md-4">
-            <div class="card bg-primary text-white p-3">
+            <div class="card bg-danger text-white p-3">
                 <h3>Failed Inspections</h3>
                 <p class="display-4">@Model.TotalFail</p>
             </div>
@@ -35,7 +35,7 @@
                 </select>
             </div>
             <div class="col-md-4">
-                <label class="form-label">Risk Rating</label>
+                <label class="form-label">Risk Level</label>
                 <select name="SelectedRiskRating" class="form-select" asp-items="ViewBag.RiskList">
                     <option value="">All Ratings</option>
                 </select>
@@ -46,15 +46,17 @@
         </div>
     </form>
 
-    <h2 class="mt-5">Últimas Inspeções</h2>
+    <h2 class="mt-5">Last Inspections</h2>
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Data</th>
-            <th>Estabelecimento</th>
+            <th>Date</th>
+            <th>Premises</th>
+            <th>Notes</th>
             <th>Score</th>
             <th>Town</th>
-            <th>Risk Rating</th>
+            <th>Risk Level</th>
+            
         </tr>
         </thead>
         <tbody>
@@ -62,6 +64,7 @@
             <tr>
                 <td>@item.InspectionDate.ToString("dd/MM/yyyy")</td>
                 <td>@item.Premises.Name</td>
+                <td>@item.Notes</td>
                 <td>@item.Score</td>
                 <td>@item.Premises.Town</td>
                 <td>@item.Premises.RiskRating</td>

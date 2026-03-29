@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace FoodSafety.Library;
 
 public enum Outcomes
@@ -9,8 +11,10 @@ public enum Outcomes
 public class Inspection
 {
     public int Id { get; set; }
+    [Display(Name = "Inspection Date")]
     public DateOnly InspectionDate { get; set; }
     public int Score { get; set; }
+    [Display(Name = "Outcome Result")]
     public Outcomes OutCome { get; set; }
     public string Notes { get; set; } = "";
     
