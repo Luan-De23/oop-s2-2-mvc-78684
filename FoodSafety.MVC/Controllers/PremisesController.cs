@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FoodSafety.MVC.Controllers
 {
-    
+    [Authorize(Roles = "Admin,Inspector")]
     public class PremisesController : Controller
     {
         private readonly ILogger<PremisesController> _logger;
@@ -48,7 +48,7 @@ namespace FoodSafety.MVC.Controllers
         }
 
         // GET: Premises/Create
-        [Authorize(Roles = "Admin,Inspector")]
+        
         public IActionResult Create()
         {
             return View();
@@ -59,7 +59,7 @@ namespace FoodSafety.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin,Inspector")]
+        
         public async Task<IActionResult> Create([Bind("Id,Name,Address,Town,RiskRating")] Premises premises)
         {
             try
@@ -100,7 +100,7 @@ namespace FoodSafety.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin,Inspector")]
+       
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,Town,RiskRating")] Premises premises)
         {
             try

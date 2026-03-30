@@ -10,7 +10,9 @@ using FoodSafety.MVC.Data;
 using Microsoft.AspNetCore.Authorization;
 
 namespace FoodSafety.MVC.Controllers
+
 {
+    [Authorize(Roles = "Admin,Inspector")]
     public class FollowUpController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -49,7 +51,7 @@ namespace FoodSafety.MVC.Controllers
         }
 
         // GET: FollowUp/Create
-        [Authorize(Roles = "Admin,Inspector")]
+        
         public IActionResult Create()
         {
             ViewData["InspectionId"] = new SelectList(_context.Inspections, "Id", "Notes");
@@ -61,7 +63,6 @@ namespace FoodSafety.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin,Inspector")]
         public async Task<IActionResult> Create([Bind("Id,DueDate,Status,ClosedDate,InspectionId")] FollowUp followUp)
         {
             try
@@ -93,7 +94,6 @@ namespace FoodSafety.MVC.Controllers
         }
 
         // GET: FollowUp/Edit/5
-        [Authorize(Roles = "Admin,Inspector")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -115,7 +115,6 @@ namespace FoodSafety.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin,Inspector")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,DueDate,Status,ClosedDate,InspectionId")] FollowUp followUp)
         {
             try

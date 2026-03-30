@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FoodSafety.MVC.Controllers
 {
+    [Authorize(Roles = "Admin,Inspector")]
     public class InspectionController : Controller
     {
         private readonly ILogger<InspectionController> _logger;
@@ -49,7 +50,7 @@ namespace FoodSafety.MVC.Controllers
         }
 
         // GET: Inspection/Create
-        [Authorize(Roles = "Admin,Inspector")]
+        
         public IActionResult Create()
         {
             ViewData["PremisesId"] = new SelectList(_context.Premises, "Id", "Address");
@@ -88,7 +89,6 @@ namespace FoodSafety.MVC.Controllers
         }
 
         // GET: Inspection/Edit/5
-        [Authorize(Roles = "Admin,Inspector")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -110,7 +110,6 @@ namespace FoodSafety.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin,Inspector")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,InspectionDate,Score,OutCome,Notes,PremisesId")] Inspection inspection)
         {
             try
