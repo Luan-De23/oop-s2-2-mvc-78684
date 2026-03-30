@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FoodSafety.MVC.Controllers
 {
-    [Authorize(Roles = "Admin,Inspector")]
+    [Authorize(Roles = "Admin")]
     public class PremisesController : Controller
     {
         private readonly ILogger<PremisesController> _logger;
@@ -143,7 +143,6 @@ namespace FoodSafety.MVC.Controllers
         }
 
         // GET: Premises/Delete/5
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -164,7 +163,6 @@ namespace FoodSafety.MVC.Controllers
         // POST: Premises/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var premises = await _context.Premises.FindAsync(id);
