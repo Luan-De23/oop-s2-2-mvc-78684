@@ -33,7 +33,7 @@
                 <select asp-for="RiskRating" class="form-control"></select>
                 <span asp-validation-for="RiskRating" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mt-2">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
@@ -41,7 +41,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="badge bg-secondary text-white p-2 mt-2 text-decoration-none" asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

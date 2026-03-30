@@ -28,6 +28,7 @@ try
 
     builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
         .AddEntityFrameworkStores<ApplicationDbContext>();
+    
     builder.Services.ConfigureApplicationCookie(options =>
     {
         options.LoginPath = "/Identity/Account/Login";

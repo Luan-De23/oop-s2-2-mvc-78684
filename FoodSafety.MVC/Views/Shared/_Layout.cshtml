@@ -29,13 +29,16 @@
                     @if (User.IsInRole("Admin") || User.IsInRole("Inspector"))
                     {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="FollowUp" asp-action="Index">FollowUp</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Inspection" asp-action="Index">Inspection</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Premises" asp-action="Index">Inspection</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="FollowUp" asp-action="Index">FollowUp</a>
+                        </li>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Premises" asp-action="Index">Premises</a>
                         </li>
                     }
 

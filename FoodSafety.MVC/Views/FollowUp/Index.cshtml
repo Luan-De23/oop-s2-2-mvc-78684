@@ -8,9 +8,9 @@
 <h1>FollowUp</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="badge bg-success text-white fs-6 p-2 text-decoration-none" asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>
@@ -45,11 +45,12 @@
             </td>
             <td>
                 
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a class="badge bg-primary text-white fs-6 p-2 text-decoration-none" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a class="badge bg-secondary text-white fs-6 p-2 text-decoration-none" asp-action="Details" asp-route-id="@item.Id">Details</a>
                 @if (User.IsInRole("Admin"))
                 {
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <label> | </label>
+                    <a class="badge bg-danger text-white fs-6 p-2 text-decoration-none" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 }
             </td>
         </tr>

@@ -1,3 +1,4 @@
+@using FoodSafety.Library
 @model FoodSafety.Library.ViewModel
 
 <div class="container">
@@ -12,7 +13,7 @@
             </div>
         </div>
         
-        <div class="col-md-4">
+        <div class="col-md-4">  
             <div class="card bg-danger text-white p-3">
                 <h3>Failed Inspections</h3>
                 <p class="display-4">@Model.TotalFail</p>
@@ -66,8 +67,22 @@
                 <td>@item.Premises.Name</td>
                 <td>@item.Notes</td>
                 <td>@item.Score</td>
-                <td>@item.Premises.Town</td>
-                <td>@item.Premises.RiskRating</td>
+                <td>@item.Premises.Town</td> 
+                @{
+                    var bgColor = item.Premises.RiskRating == RiskLevel.High ? "bg-danger" : 
+                        item.Premises.RiskRating == RiskLevel.Medium ? "bg-warning" : "bg-success";
+                }
+
+                <td>
+                    <div class="badge @bgColor text-white fs-6 p-3 d-inline-block" style="width: 120px;">
+                        @item.Premises.RiskRating
+                    </div>
+                </td>
+                
+                
+                    
+                
+                
             </tr>
         }
         </tbody>

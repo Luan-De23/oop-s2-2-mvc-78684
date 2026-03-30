@@ -24,7 +24,10 @@
             </div>
             <div class="form-group">
                 <label asp-for="OutCome" class="control-label"></label>
-                <select asp-for="OutCome" class="form-control"></select>
+                <select asp-for="OutCome" class="form-control" 
+                        asp-items="Html.GetEnumSelectList<FoodSafety.Library.Outcomes>()">
+                    <option value="">-- Select --</option>
+                </select>
                 <span asp-validation-for="OutCome" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -36,7 +39,7 @@
                 <label asp-for="PremisesId" class="control-label"></label>
                 <select asp-for="PremisesId" class ="form-control" asp-items="ViewBag.PremisesId"></select>
             </div>
-            <div class="form-group">
+            <div class="form-group mt-2">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
@@ -44,6 +47,6 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="badge bg-secondary text-white p-2 mt-2 text-decoration-none" asp-action="Index">Back to List</a>
 </div>
 

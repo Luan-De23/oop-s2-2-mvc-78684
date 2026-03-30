@@ -1,4 +1,3 @@
-@using FoodSafety.Library
 @model FoodSafety.Library.FollowUp
 
 @{
@@ -33,10 +32,10 @@
                 <span asp-validation-for="ClosedDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="InspectionId" class="control-label"></label>
+                <label asp-for="InspectionId" class="control-label">Notes</label>
                 <select asp-for="InspectionId" class ="form-control" asp-items="ViewBag.InspectionId"></select>
             </div>
-            <div class="form-group">
+            <div class="form-group mt-2 ">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
@@ -44,7 +43,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="badge bg-secondary text-white p-2 mt-2 text-decoration-none" asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
