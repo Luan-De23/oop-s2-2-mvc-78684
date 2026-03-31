@@ -49,7 +49,6 @@ public class DbSeeder
                 await userManager.AddToRoleAsync(user, "Inspector");
             }
         }
-        
         // Viewer
         if (!await roleManager.RoleExistsAsync("Viewer"))
         {
