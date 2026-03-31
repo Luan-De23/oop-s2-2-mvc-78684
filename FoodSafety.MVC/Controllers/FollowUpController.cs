@@ -54,7 +54,7 @@ namespace FoodSafety.MVC.Controllers
         
         public IActionResult Create()
         {
-            ViewData["InspectionId"] = new SelectList(_context.Inspections, "Id", "Notes");
+            ViewData["InspectionId"] = new SelectList(_context.Inspections, "Id", "Id");
             return View();
         }
 
@@ -63,7 +63,7 @@ namespace FoodSafety.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,DueDate,Status,ClosedDate,InspectionId")] FollowUp followUp)
+        public async Task<IActionResult> Create([Bind("Id,DueDate,Status,ClosedDate,InspectionId,Id")] FollowUp followUp)
         {
             try
             {
@@ -82,7 +82,7 @@ namespace FoodSafety.MVC.Controllers
                     _logger.LogInformation("FollowUp created: {FollowUpId} for InspectionId {InspectionId} by {User}");
                     return RedirectToAction(nameof(Index));
                 }
-                ViewData["InspectionId"] = new SelectList(_context.Inspections, "Id", "Notes", followUp.InspectionId);
+                ViewData["InspectionId"] = new SelectList(_context.Inspections, "Id", "Id", followUp.InspectionId);
                 return View(followUp);
             }
             catch (Exception e)
